@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Propose Day ❤️</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=Great+Vibes&display=swap" rel="stylesheet">
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+body{
+    background:#0b0014;
+    overflow:hidden;
+    color:white;
+}
+.slide{
+    width:100vw;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+    position:absolute;
+    top:0;
+    left:0;
+    opacity:0;
+    transition:0.8s ease;
+}
+.slide.active{
+    opacity:1;
+    z-index:1;
+}
+h1{
+    font-size:2.3rem;
+    margin-bottom:15px;
+}
+p{
+    font-size:1.2rem;
+    opacity:0.9;
+    max-width:720px;
+}
+.romantic{
+    font-family:'Great Vibes',cursive;
+    font-size:3rem;
+    color:#ff5fa2;
+}
+.btn{
+    padding:12px 30px;
+    border:none;
+    border-radius:30px;
+    background:linear-gradient(45deg,#ff0066,#ff8fd1);
+    color:white;
+    font-size:1rem;
+    cursor:pointer;
+    box-shadow:0 0 20px #ff5fa2;
+    transition:0.3s ease;
+}
+.btn:active{
+    transform:scale(0.95);
+}
+.buttons{
+    margin-top:30px;
+    position:relative;
+    width:100%;
+    height:160px;
+}
+#noBtn{
+    position:absolute;
+}
+.heart{
+    position:absolute;
+    color:#ff4d88;
+    font-size:20px;
+    animation:float 6s linear infinite;
+}
+@keyframes float{
+    0%{transform:translateY(0);opacity:1;}
+    100%{transform:translateY(-900px);opacity:0;}
+}
+</style>
+</head>
+
+<body>
+
+<!-- Slide 1 -->
+<div class="slide active">
+    <h1>Hey You ❤️</h1>
+    <p>Aaj ek choti si baat kehni hai…</p>
+    <button class="btn" onclick="next()">Tap Here 💌</button>
+</div>
+
+<!-- Slide 2 -->
+<div class="slide">
+    <p class="romantic">Tum meri life ka</p>
+    <h1>Sabse khoobsurat coincidence ho ✨</h1>
+    <button class="btn" onclick="next()">Next 💕</button>
+</div>
+
+<!-- Slide 3 -->
+<div class="slide">
+    <h1>Jab tum haste ho 😍</h1>
+    <p>Meri saari tension kahin kho jaati hai</p>
+    <button class="btn" onclick="next()">Aage 💖</button>
+</div>
+
+<!-- Slide 4 -->
+<div class="slide">
+    <h1>Tumhari ek smile 😊</h1>
+    <p>Mere poore din ko special bana deti hai</p>
+    <button class="btn" onclick="next()">Next 🌹</button>
+</div>
+
+<!-- Slide 5 -->
+<div class="slide">
+    <p class="romantic">Aur sach kahun toh…</p>
+    <h1>Mujhe tumse pyaar ho gaya hai ❤️</h1>
+    <button class="btn" onclick="next()">One Last 💍</button>
+</div>
+
+<!-- Final Proposal -->
+<div class="slide">
+    <h1 class="romantic">Will You Be Mine? 💖</h1>
+    <p id="convinceText">Iss Propose Day, tum mera haath thamogi?</p>
+
+    <div class="buttons">
+        <button class="btn" onclick="sayYes()">YES 💍</button>
+        <button class="btn" id="noBtn" onclick="sayNo()">NO 🙈</button>
+    </div>
+</div>
+
+<script>
+/* Slide navigation */
+let slides = document.querySelectorAll('.slide');
+let index = 0;
+function next(){
+    slides[index].classList.remove('active');
+    index++;
+    slides[index].classList.add('active');
+}
+
+/* Floating hearts */
+setInterval(()=>{
+    let heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random()*100 + "vw";
+    heart.style.bottom = "-20px";
+    heart.style.fontSize = Math.random()*20 + 15 + "px";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+},400);
+
+/* Convincing messages + NO button logic */
+let convinceMessages = [
+    "Ek baar dil se soch ke dekho… main tumhari respect hamesha sabse upar rakhunga ❤️",
+    "Main perfect nahi hoon, par tumhare liye better banne ki koshish karunga 💖",
+    "Tumhari ek muskurahat meri duniya bright kar deti hai ✨",
+    "Tumhare saath simple moments bhi special lagte hain 🌸",
+    "Main tumhari baatein sunna chahta hoon… bina judge kiye 💌",
+    "Tumhari marzi aur tumhari space mere liye important hai 😌",
+    "Sach bolun toh… tum mere dil ke bohot kareeb ho ❤️",
+    "Bas ek chance… pyaar ko samajhne ka 💍"
+];
+
+let noCount = 0;
+let noBtn = document.getElementById("noBtn");
+
+function sayNo(){
+    if(noCount < convinceMessages.length){
+        document.getElementById("convinceText").innerText =
+            convinceMessages[noCount];
+
+        // Move NO button randomly
+        let x = Math.random() * 70;
+        let y = Math.random() * 80;
+        noBtn.style.left = x + "%";
+        noBtn.style.top = y + "%";
+
+        noCount++;
+    } else {
+        document.getElementById("convinceText").innerText =
+            "Ab bas… dil maan gaya ❤️ Sirf YES hi bacha hai 😍";
+        noBtn.style.display = "none";
+    }
+}
+
+function sayYes(){
+    alert("She Said YES 💍❤️\nMeri duniya complete ho gayi 🥺✨");
+}
+</script>
+
+</body>
+</html>
